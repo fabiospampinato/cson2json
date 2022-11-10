@@ -1,5 +1,6 @@
 
 //TODO: Implement indentation rules
+//TODO: Reimplement this on top of RegHex
 
 /* INIT */
 

@@ -1,15 +1,15 @@
 
 /* IMPORT */
 
-import CSON = require ( '../src/parser/cson.js' ); //UGLY
+import {CSON} from '../src/parser/cson.js';
 
-/* CSON 2 JSON */
+/* MAIN */
 
-function cson2json ( cson: string ) {
+const cson2json = ( cson: string ) => {
 
   return CSON.parse ( cson );
 
-}
+};
 
 /* EXPORT */
 

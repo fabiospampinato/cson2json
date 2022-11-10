@@ -1,25 +1,23 @@
 
-/* REQUIRE */
+/* IMPORT */
 
-const {argv} = require ( 'yargs' ),
-      diff = require ( 'test-diff' ),
-      fs = require ( 'fs' ),
-      mkdirp = require ( 'mkdirp' ),
-      path = require ( 'path' ),
-      {default: cson2json} = require ( '../dist' );
+import fs from 'node:fs';
+import path from 'node:path';
+import diff from 'test-diff';
+import cson2json from '../dist/index.js';
 
-/* VARIABLES */
+/* HELPERS */
 
-const CHECK = path.join ( __dirname, 'check' ),
-      OUTPUT = path.join ( __dirname, 'output' ),
-      SOURCE = path.join ( __dirname, 'source' ),
-      GLOB_SOURCE = argv.only ? `${argv.only}.cson{}` : '*',
-      GLOB_CHECK = argv.only ? `${argv.only}.json{}` : '*';
+const CHECK = path.join ( process.cwd (), 'test', 'check' );
+const OUTPUT = path.join ( process.cwd (), 'test', 'output' );
+const SOURCE = path.join ( process.cwd (), 'test', 'source' );
+const GLOB_SOURCE = '*';
+const GLOB_CHECK = '*';
 
-/* DIFF */
+/* MAIN */
 
 diff ({
-  verbose: !!argv.verbose,
+  verbose: true,
   source: {
     cwd: SOURCE,
     glob: GLOB_SOURCE
@@ -27,7 +25,7 @@ diff ({
   output: {
     cwd: OUTPUT,
     make ( source ) {
-      mkdirp.sync ( OUTPUT );
+      fs.mkdirSync ( OUTPUT, { recursive: true } );
       const cson = fs.readFileSync ( path.join ( SOURCE, source ), 'utf8' );
       const obj = cson2json ( cson );
       const json = JSON.stringify ( obj, undefined, 2 );
