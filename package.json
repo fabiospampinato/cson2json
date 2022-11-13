@@ -25,7 +25,7 @@
   ],
   "devDependencies": {
     "pegjs": "0.10.0",
-    "test-diff": "2.0.0",
+    "test-diff": "2.0.2",
     "tsex": "^1.1.2",
     "typescript": "^4.8.4"
   }
